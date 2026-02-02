@@ -1,18 +1,18 @@
-# Calculadora Web - Proyecto The Odin Project
+# Web Calculator - The Odin Project
 
-Este proyecto es una calculadora funcional desarrollada con **HTML5**, **CSS3** y **JavaScript** vainilla. La aplicación permite realizar operaciones aritméticas básicas a través de una interfaz limpia y responsiva.
+This is a calculator I made using **HTML**, **CSS**, and **Vanilla JavaScript**. It can do all the basic math and has a clean, responsive look.
 
-## Características y Funcionalidad
+## How it works
 
-* **Lógica de Operaciones:** El motor de la calculadora utiliza una función `operate` que gestiona las cuatro operaciones básicas (suma, resta, multiplicación y división) mediante un flujo de control `switch`.
-* **Manejo de Estados:** El script rastrea el primer número, el segundo número y el operador seleccionado como variables independientes. Esto permite que la calculadora actualice el contenido del visor dinámicamente según la entrada del usuario.
-* **Encadenamiento de Cálculos:** La lógica implementada permite realizar cálculos continuos. Al presionar un operador después de haber ingresado dos números, la aplicación resuelve la operación pendiente y utiliza el resultado como base para el siguiente cálculo.
-* **Interfaz de Usuario (UI):** * Diseño oscuro con componentes visuales responsivos mediante el uso de **Flexbox** y **Media Queries**.
-    * Ordenamiento de botones personalizado mediante la propiedad `order` de CSS para mantener una estructura lógica en el HTML mientras se ajusta la posición visual.
-    * Efectos de interacción (`hover` y `active`) para mejorar la experiencia táctil y visual.
+* **The Math Brain:** I built an `operate` function that handles plus, minus, times, and divide using a `switch` statement.
+* **Managing Variables:** The script keeps track of `firstNumber`, `secondNumber`, and the `currentOperator`. I set it up so the display updates every time you click a button.
+* **Chaining:** The logic lets you keep going with your math. If you hit an operator after typing two numbers, it solves the first part and uses that result for the next step.
+* **The UI:** * I went with a dark theme and used **Flexbox** and **Media Queries** so it looks good on any screen.
+    * I used the CSS `order` property to move buttons around without messing up the HTML structure.
+    * I added `hover` and `active` effects so the buttons feel real when you click them.
 
-## Estructura del Código
+## The Files
 
-* **`index.html`**: Define la estructura del DOM, incluyendo el visor de resultados y los contenedores de botones.
-* **`style.css`**: Contiene toda la estilización, manejo de colores y la adaptabilidad para dispositivos móviles.
-* **`calculator.js`**: Gestiona los eventos de clic, la conversión de tipos de datos (Strings a Numbers) y la lógica matemática detrás de cada operación.
+* **`index.html`**: This is the skeleton of the app, with the display and all the button containers.
+* **`style.css`**: This has all the colors and makes sure the calculator works on mobile.
+* **`calculator.js`**: This is where the magic happens. It handles the clicks, turns strings into numbers (using `Number()`), and runs the math logic.
