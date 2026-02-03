@@ -7,48 +7,99 @@ const buttons = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalBtn = document.querySelector("#equals");
+const delBtn = document.querySelector("#backspace");
 
-buttons.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    const btnValue = event.target.textContent;
+function updateHistory() {
+  const history = document.querySelector("#history");
+  history.textContent = `${firstNumber} ${currentOperator || ""} ${secondNumber}`;
+}
 
-    if (currentOperator === null) {
-      firstNumber += btnValue;
-      display.textContent = firstNumber;
-    } else {
-      secondNumber += btnValue;
-      display.textContent = secondNumber;
-    }
-  });
-});
-operators.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    let num1 = Number(firstNumber);
-    let num2 = Number(secondNumber);
-    if (firstNumber !== "" && currentOperator !== "" && secondNumber !== "") {
-      let numResult = operate(currentOperator, num1, num2);
-      firstNumber = String(numResult);
-      secondNumber = "";
-      display.textContent = numResult;
-    }
-    currentOperator = event.target.textContent;
-  });
-});
+function updateDisplay(value) {
+  display.textContent = value;
+}
 
-clearBtn.addEventListener("click", () => {
+function handleNumber(num) {
+  if (currentOperator === null) {
+    if (num === "." && firstNumber.includes(".")) return;
+    firstNumber += num;
+    updateDisplay(firstNumber);
+    updateHistory();
+  } else {
+    if (num === "." && secondNumber.includes(".")) return;
+    secondNumber += num;
+    updateDisplay(secondNumber);
+    updateHistory();
+  }
+}
+
+function handleOperator(op) {
+  if (firstNumber !== "" && currentOperator !== null && secondNumber !== "") {
+    const result = operate(
+      currentOperator,
+      Number(firstNumber),
+      Number(secondNumber),
+    );
+    firstNumber = String(result);
+    secondNumber = "";
+    updateDisplay(result);
+  }
+  currentOperator = op;
+  updateHistory();
+}
+
+function handleClear() {
   firstNumber = "";
   secondNumber = "";
   currentOperator = null;
+  updateDisplay("0");
+  updateHistory();
+}
 
-  display.textContent = "0";
+function handleEquals() {
+  if (firstNumber === "" || secondNumber === "" || currentOperator === null)
+    return;
+
+  const result = operate(
+    currentOperator,
+    Number(firstNumber),
+    Number(secondNumber),
+  );
+  firstNumber = String(result);
+  secondNumber = "";
+  currentOperator = null;
+  updateDisplay(result);
+  updateHistory();
+}
+
+function handleDelete() {
+  if (currentOperator === null) {
+    firstNumber = firstNumber.slice(0, -1);
+    updateDisplay(firstNumber || "0");
+  } else {
+    secondNumber = secondNumber.slice(0, -1);
+    updateDisplay(secondNumber || "0");
+  }
+  updateHistory();
+}
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", (e) => handleNumber(e.target.textContent));
 });
 
-equalBtn.addEventListener("click", () => {
-  const num1 = Number(firstNumber);
-  const num2 = Number(secondNumber);
+operators.forEach((item) => {
+  item.addEventListener("click", (e) => handleOperator(e.target.textContent));
+});
 
-  let numReturn = operate(currentOperator, num1, num2);
-  display.textContent = numReturn;
+clearBtn.addEventListener("click", handleClear);
+equalBtn.addEventListener("click", handleEquals);
+delBtn.addEventListener("click", handleDelete);
+
+window.addEventListener("keydown", (e) => {
+  if ((e.key >= "0" && e.key <= "9") || e.key === ".") handleNumber(e.key);
+  if (["+", "-", "*", "/"].includes(e.key)) handleOperator(e.key);
+  if (e.key === "Enter" || e.key === "=") handleEquals();
+  if (e.key === "Escape") handleClear();
+  if (e.key === "Backspace") handleDelete();
 });
 
 const operate = function (operator, a, b) {

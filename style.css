@@ -1,195 +1,234 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #0e0e0f;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  background-color: #0e0e0f;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
 }
-
 
 .calculator {
-    border-radius: 10px;
-    width: 300px;
-    padding: 20px;
-    background-color: #2d2d2d;
+  display: flex; /* Added to manage vertical stack */
+  flex-direction: column;
+  border-radius: 10px;
+  width: 300px;
+  padding: 20px;
+  background-color: #2d2d2d;
 }
 
-.number {
-    padding: 20px;
-    border-radius: 10px;
-    border: none;
-    font-size: 18px;
-    font-weight: 800;
+.number,
+.operator,
+#equals,
+#backspace,
+#clear {
     width: calc(25% - 6px);
-    background-color: #505050;
-    color: #fff;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Remove padding to keep height consistent */
+}
+
+#clear { order: 1; width: calc(50% - 4px); }
+#backspace { order: 2; }
+.operator[value="/"] { order: 3; }
+
+.number {
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: 800;
+  width: calc(25% - 6px);
+  background-color: #505050;
+  color: #fff;
 }
 
 .number:hover {
-    background-color: #7a7a7a;
-    transform: scale(1.02);
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  background-color: #7a7a7a;
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .number:active {
-    background-color: #3d3d3d;
-    transform: scale(0.95);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #3d3d3d;
+  transform: scale(0.95);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .operator {
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 800;
-    width: calc(25% - 6px);
-    background-color: #ff9500;
-    color: #fff;
-    border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  width: calc(25% - 6px);
+  background-color: #ff9500;
+  color: #fff;
+  border: none;
 }
 
 .operator:hover {
-    background-color: #cc7700;
-    transform: scale(1.02);
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  background-color: #cc7700;
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .operator:active {
-    background-color: #fdb653;
-    transform: scale(0.95);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fdb653;
+  transform: scale(0.95);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #equals {
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 800;
-    width: calc(25% - 6px);
-    background-color: #ff9500;
-    border: none;
-    color: #fff;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  width: calc(25% - 6px);
+  background-color: #ff9500;
+  border: none;
+  color: #fff;
 }
 
 #equals:hover {
-    background-color: #cc7700;
-    transform: scale(1.02);
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  background-color: #cc7700;
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 #equals:active {
-    background-color: #fdb653;
-    transform: scale(0.95);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fdb653;
+  transform: scale(0.95);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #clear {
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 800;
-    width: calc(50% - 6px);
-    border: none;
-    background-color: red;
-    color: #fff;
+  width: calc(50% - 4px); /* Takes up two slots */
+  background-color: #ff3b30; /* Standard Apple red */
+  border: none;
+  border-radius: 10px;
 }
 
 #clear:hover {
-    background-color: #b30000;
-    transform: scale(1.02);
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  background-color: #b30000;
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 #clear:active {
-    background-color: #fd5353;
-    transform: scale(0.95);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fd5353;
+  transform: scale(0.95);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#backspace {
+  width: calc(25% - 6px);
+  background-color: #5856d6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+#backspace:hover {
+  background-color: #3f3dac;
+  transform: scale(1.02);
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+#backspace:active {
+  background-color: #6663eb;
+  transform: scale(0.95);
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #display {
-    background-color: #2d2d2d;
-    font-size: 32px;
-    font-weight: bold;
-    padding: 20px;
-    text-align: right;
-    color: #fff;
-    border-radius: 10px;
-    border: none;
+  background-color: transparent; /* Clean up the look */
+  font-size: 32px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: right;
+  color: #fff;
+  margin-bottom: 15px; /* Space before buttons */
 }
 
-/* Number buttons - assign specific positions */
-.buttons button:nth-child(1) { order: 12; }  /* 0 */
-.buttons button:nth-child(2) { order: 8; }   /* 1 */
-.buttons button:nth-child(3) { order: 9; }   /* 2 */
-.buttons button:nth-child(4) { order: 10; }  /* 3 */
-.buttons button:nth-child(5) { order: 4; }   /* 4 */
-.buttons button:nth-child(6) { order: 5; }   /* 5 */
-.buttons button:nth-child(7) { order: 6; }   /* 6 */
-.buttons button:nth-child(8) { order: 0; }   /* 7 */
-.buttons button:nth-child(9) { order: 1; }   /* 8 */
-.buttons button:nth-child(10) { order: 2; }  /* 9 */
-.buttons button:nth-child(11) { order: 13; } /* . */
+#history {
+  display: block; /* Make it a block to stay on top */
+  min-height: 25px; /* Keeps space even when empty */
+  font-size: 17px; /* Slightly smaller */
+  color: #888; /* Grayed out */
+  text-align: right;
+  padding: 0 10px;
+  margin-bottom: -5px;
+  margin-top: 10px;
+}
 
-/* Operators */
-.buttons button:nth-child(12) { order: 15; } /* + */
-.buttons button:nth-child(13) { order: 11; } /* - */
-.buttons button:nth-child(14) { order: 7; }  /* * */
-.buttons button:nth-child(15) { order: 3; }  /* / */
+.number:nth-of-type(8) { order: 4; } /* 7 */
+.number:nth-of-type(9) { order: 5; } /* 8 */
+.number:nth-of-type(10) { order: 6; } /* 9 */
+.operator[value="*"] { order: 7; }
 
-/* Special */
-.buttons button:nth-child(16) { order: 14; } /* = */
-.buttons button:nth-child(17) { order: 16; } /* AC */
+.number:nth-of-type(5) { order: 8; } /* 4 */
+.number:nth-of-type(6) { order: 9; } /* 5 */
+.number:nth-of-type(7) { order: 10; } /* 6 */
+.operator[value="-"] { order: 11; }
+
+.number:nth-of-type(2) { order: 12; } /* 1 */
+.number:nth-of-type(3) { order: 13; } /* 2 */
+.number:nth-of-type(4) { order: 14; } /* 3 */
+.operator[value="+"] { order: 15; }
+
+.number:nth-of-type(1) { order: 16; width: calc(50% - 4px); } /* 0 spans 2 */
+.number:nth-of-type(11) { order: 17; } /* . */
+#equals { order: 18; }
 
 @media (max-width: 768px) {
-    .calculator{
-        width: 280px;
-        padding: 15px;
-    }
+  .calculator {
+    width: 280px;
+    padding: 15px;
+  }
 
-    .number, .operator, #equals, #clear {
-        padding: 15px;
-        font-size: 16px;
-    }
+  .number,
+  .operator,
+  #equals,
+  #clear {
+    padding: 15px;
+    font-size: 16px;
+  }
 
-    #display {
-        font-size: 28px;
-        padding: 15px;
-    }
+  #display {
+    font-size: 28px;
+    padding: 15px;
+  }
 }
 
 @media (max-width: 480px) {
-    .calculator{
-        width: 95%;
-        max-width: 350px;
-        padding: 12px;
-    }
+  .calculator {
+    width: 90%;
+    max-width: 320px;
+    padding: 15px;
+  }
 
-    .number, .operator, #equals, #clear {
-        padding: 12px;
-        font-size: 14px;
-    }
+  .number, .operator, #equals, #backspace, #clear {
+    height: 55px; 
+    font-size: 16px;
+  }
 
-    #display {
-        font-size: 24px;
-        padding: 12px;
-    }
-
-    .buttons {
-        gap: 6px;
-    }
+  #display {
+    font-size: 26px;
+  }
 }
